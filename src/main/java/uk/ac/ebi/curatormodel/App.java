@@ -2,7 +2,7 @@ package uk.ac.ebi.curatormodel;
 
 import uk.ac.ebi.uniprot.curatormodel.model.Accessions;
 import uk.ac.ebi.uniprot.curatormodel.model.Citation;
-import uk.ac.ebi.uniprot.curatormodel.model.CitationEntry;
+import uk.ac.ebi.uniprot.curatormodel.model.CuratedCitation;
 import uk.ac.ebi.uniprot.curatormodel.model.Entry;
 import uk.ac.ebi.uniprot.curatormodel.util.CitationFactory;
 import uk.ac.ebi.uniprot.curatormodel.util.EntryFactory;

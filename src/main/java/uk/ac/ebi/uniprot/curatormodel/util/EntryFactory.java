@@ -7,7 +7,7 @@ package uk.ac.ebi.uniprot.curatormodel.util;
 import java.util.logging.Logger;
 import uk.ac.ebi.uniprot.curatormodel.model.Citation;
 import uk.ac.ebi.uniprot.curatormodel.model.Accessions;
-import uk.ac.ebi.uniprot.curatormodel.model.CitationEntry;
+import uk.ac.ebi.uniprot.curatormodel.model.CuratedCitation;
 import uk.ac.ebi.uniprot.curatormodel.model.Entry;
 import uk.ac.ebi.uniprot.curatormodel.model.FullEntry;
 
@@ -27,7 +27,7 @@ public class EntryFactory {
         logger.info(String.format("Made new CitationEtry for: %s", citation.getTitle()));
         
         
-        return new CitationEntry(citation);
+        return new CuratedCitation(citation);
     }
     
 }

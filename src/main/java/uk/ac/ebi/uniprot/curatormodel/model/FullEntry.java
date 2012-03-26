@@ -12,20 +12,31 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
  *
  * @author Jules Jacobsen <jacobsen@ebi.ac.uk>
  */
-public class FullEntry extends AbstractEntry {
+public class FullEntry implements Entry {
     
     Identifier id;
     Accessions accessions;
     Taxonomy tax;
-    List<CitationEntry> citationEntries;
+    List<CuratedCitation> citationEntries;
     List<Citation> citations;
-
+    
+    //interface variables - these are also generated from the citations in the
+    //citation list as some annotations may not be derived from a citation, hence the Entry nterface
+    List<Comment> comments;
+    List<Feature> features;
+    GeneNames geneNames;
+    InternalSection internalSection;
+    List<KeyWord> keywords;
+    ProteinNames proteinNames;
+    Sequence sequence;
+    List<Xref> xrefs;
+    
     public FullEntry() {
         super();
         id = new Identifier();
         accessions = new Accessions();
         tax = new Taxonomy();
-        citationEntries = new ArrayList<CitationEntry>();
+        citationEntries = new ArrayList<CuratedCitation>();
         citations = new ArrayList<Citation>();
         
     }
@@ -41,7 +52,7 @@ public class FullEntry extends AbstractEntry {
     }
 
     public List<Citation> getCitations() {
-        for (CitationEntry citationEntry : citationEntries) {
+        for (CuratedCitation citationEntry : citationEntries) {
             citations.addAll(citationEntry.getCitations());
         }
         return citations;
@@ -67,7 +78,86 @@ public class FullEntry extends AbstractEntry {
         this.tax = tax;
     }
     
-    
+    //interface implementations
+    @Override
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    @Override
+    public List<Feature> getFeatures() {
+        return features;
+    }
+
+    @Override
+    public GeneNames getGeneNames() {
+        return geneNames;
+    }
+
+    @Override
+    public InternalSection getInternalSection() {
+        return internalSection;
+    }
+
+    @Override
+    public List<KeyWord> getKeywords() {
+        return keywords;
+    }
+
+    @Override
+    public ProteinNames getProteinNames() {
+        return proteinNames;
+    }
+
+    @Override
+    public Sequence getSequence() {
+        return sequence;
+    }
+
+    @Override
+    public List<Xref> getXrefs() {
+        return xrefs;
+    }
+
+    @Override
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public void setFeatures(List<Feature> features) {
+        this.features = features;
+    }
+
+    @Override
+    public void setGeneNames(GeneNames geneNames) {
+        this.geneNames = geneNames;
+    }
+
+    @Override
+    public void setInternalSection(InternalSection internalSection) {
+        this.internalSection = internalSection;
+    }
+
+    @Override
+    public void setKeywords(List<KeyWord> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public void setProteinNames(ProteinNames proteinNames) {
+        this.proteinNames = proteinNames;
+    }
+
+    @Override
+    public void setSequence(Sequence sequence) {
+        this.sequence = sequence;
+    }
+
+    @Override
+    public void setXrefs(List<Xref> xrefs) {
+        this.xrefs = xrefs;
+    }
     
     
     
