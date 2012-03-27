@@ -10,4 +10,33 @@ package uk.ac.ebi.uniprot.curatormodel.model;
  */
 public class Comment {
     
+    private CommentType type;
+    private String comment;
+
+    public Comment(CommentType type, String comment) {
+        this.type = type;
+        this.comment = comment;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public CommentType getType() {
+        return type;
+    }
+
+    public void setType(CommentType type) {
+        this.type = type;
+    }
+    
+    
+    public String toString(){
+        return String.format("CC   -!- %s: %s", type, comment);
+    }
+    
 }

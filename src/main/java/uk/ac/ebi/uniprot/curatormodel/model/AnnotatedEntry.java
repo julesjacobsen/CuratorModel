@@ -77,12 +77,10 @@ public class AnnotatedEntry implements Annotatable {
         this.tax = tax;
     }
     
-    private int refNumber = 1;
-    
-    public void addAnnotatedCitation(AnnotatedCitation annotatedCitation) {
-        annotatedCitation.setReferenceNumber(refNumber);
-        annotatedCitations.add(annotatedCitation);
+    public List<AnnotatedCitation> getAnnotatedCitations() {
+        return annotatedCitations;
     }
+    
     //interface implementations
     @Override
     public List<Comment> getComments() {
@@ -164,5 +162,37 @@ public class AnnotatedEntry implements Annotatable {
         this.xrefs = xrefs;
     }
     
+    public static final String EOL = System.getProperty("line.separator");
     
+    public String toString() {
+        StringBuilder refBuilder = new StringBuilder();
+        StringBuilder commentBuilder = new StringBuilder();
+        StringBuilder xrefBuilder = new StringBuilder();
+        StringBuilder featureBuilder = new StringBuilder();
+        StringBuilder evidenceBuilder = new StringBuilder();
+
+        for (AnnotatedCitation annotatedCitation : annotatedCitations) {
+            EvidenceTag curatorTag = annotatedCitation.getCuratorEvidence();
+            evidenceBuilder.append(curatorTag).append(EOL);
+            refBuilder.append(annotatedCitation.getCitation()).append(EOL);
+            if (annotatedCitation.getComments() != null) {
+                for (Comment comment : annotatedCitation.getComments()) {
+                    commentBuilder.append(comment).append(curatorTag.getTag()).append(EOL);
+                }
+            }
+            if (annotatedCitation.getXrefs() != null) {
+                for (Xref xref : annotatedCitation.getXrefs()) {
+                    xrefBuilder.append(xref).append(EOL);
+                }
+            }
+            if (annotatedCitation.getFeatures() != null) {
+               for (Feature feature : annotatedCitation.getFeatures()) {
+                    featureBuilder.append(feature).append(curatorTag.getTag()).append(EOL);
+                } 
+            }     
+        }
+        
+        return String.format("%s%n%s%n%s%s%s%s%s", id, accessions, refBuilder, commentBuilder, xrefBuilder, featureBuilder, evidenceBuilder);
+    }
+
 }

@@ -50,7 +50,7 @@ public class Citation {
     
     @Override
     public String toString() {
-        return String.format("RN   [%d]%nRX   %s%nRT   \"%s\"", refNumber, pmid, title);
+        return String.format("RN   [%d]%nPR   %s%nRX   PubMed=%s;%nRT   \"%s\"", refNumber, rpLine, pmid,title);
     }
     
     

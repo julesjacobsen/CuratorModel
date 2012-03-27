@@ -6,7 +6,6 @@ package uk.ac.ebi.uniprot.curatormodel.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import uk.ac.ebi.uniprot.curatormodel.model.Citation;
 import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
 
 
@@ -17,7 +16,8 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
 public class AnnotatedCitation implements Annotatable {
 
     private Citation citation;
-    private EvidenceTag evTag;
+    private EvidenceTag curatorEvidence;
+    private List<EvidenceTag> evTags;
     private int referenceNumber;
     
     private static final String EOL = System.getProperty("line.separator");
@@ -31,10 +31,13 @@ public class AnnotatedCitation implements Annotatable {
     private ProteinNames proteinNames;
     private Sequence sequence;
     private List<Xref> xrefs;
+
+    public AnnotatedCitation() {
+    }
     
-    public AnnotatedCitation(Citation citation) {
+    public AnnotatedCitation(Citation citation, EvidenceTag curatorEvidence) {
         this.citation = citation;
-        
+        this.curatorEvidence = curatorEvidence;    
     }
 
     //class-specific methods
@@ -46,12 +49,16 @@ public class AnnotatedCitation implements Annotatable {
         this.citation = citation;
     }
 
-    public EvidenceTag getEvidenceTag() {
-        return evTag;
+    public EvidenceTag getCuratorEvidence(){
+        return curatorEvidence;
     }
     
-    public void setEvidenceTag(EvidenceTag evTag) {
-        this.evTag = evTag;
+    public List<EvidenceTag> getEvidenceTags() {
+        return evTags;
+    }
+    
+    public void setEvidenceTags(List<EvidenceTag> evTags) {
+        this.evTags = evTags;
     }
 
     public int getReferenceNumber() {
@@ -65,31 +72,31 @@ public class AnnotatedCitation implements Annotatable {
     
     //interface methods
     public List<Comment> getComments() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return comments;
     }
 
     public List<Feature> getFeatures() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return features;
     }
 
     public GeneNames getGeneNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return geneNames;
     }
 
     public InternalSection getInternalSection() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return internalSection;
     }
 
     public List<KeyWord> getKeywords() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return keywords;
     }
 
     public ProteinNames getProteinNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return proteinNames;
     }
 
     public Sequence getSequence() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return sequence;
     }
 
     public List<Xref> getXrefs() {
@@ -97,31 +104,31 @@ public class AnnotatedCitation implements Annotatable {
     }
 
     public void setComments(List<Comment> comments) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.comments = comments;
     }
 
     public void setFeatures(List<Feature> features) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.features = features;
     }
 
     public void setGeneNames(GeneNames gn) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.geneNames = geneNames;
     }
 
     public void setInternalSection(InternalSection internalSection) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.internalSection = internalSection;
     }
 
     public void setKeywords(List<KeyWord> keywords) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.keywords = keywords;
     }
 
     public void setProteinNames(ProteinNames proteinNames) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.proteinNames = proteinNames;
     }
 
     public void setSequence(Sequence sequence) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.sequence = sequence;
     }
 
     public void setXrefs(List<Xref> xrefs) {
@@ -132,12 +139,26 @@ public class AnnotatedCitation implements Annotatable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(citation).append(EOL);
-        if (!xrefs.isEmpty()) {
+        if (comments != null ) {
+            for (Comment comment : comments) {
+                stringBuilder.append(comment).append(EOL);
+            }
+        }
+        if (xrefs != null ) {
             for (Xref xref : xrefs) {
                 stringBuilder.append(xref).append(EOL);
             }
         }
-        stringBuilder.append(evTag);
+        if (sequence != null) {
+            stringBuilder.append(sequence).append(EOL);
+        }
+        
+        if (evTags != null) {
+            for (EvidenceTag evidenceTag : evTags) {
+                stringBuilder.append(evidenceTag).append(EOL);
+            }
+        }
+        stringBuilder.append(curatorEvidence);
         return stringBuilder.toString();
     }
 
