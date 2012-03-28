@@ -34,7 +34,9 @@ public class AnnotationFactory {
         evTag.setId("PubMed=" + citation.getPmid());
         evTag.setNumber(1);
 //        evTags.add(evTag);
-        
+        //the citation itself also needs the curator tag 
+        citation.getEvidenceTags().add(evTag);
+        //then the citation needs to be added to the annotatedCitation where the derived annotations are stored
         AnnotatedCitation annotatedCitation = new AnnotatedCitation(citation, evTag);
 
         annotatedCitation.setXrefs(new ArrayList<Xref>());
@@ -44,6 +46,10 @@ public class AnnotationFactory {
     }
 
     public static void addComment(AnnotatedCitation annotatedCitation, Comment comment) {
+        //remember to add the curator tag for this item to link it to the 
+        //curator and the relevant citation
+        comment.getEvidenceTags().add(annotatedCitation.getCuratorEvidence());
+        //now add the comment to the citation
         List<Comment> comments = annotatedCitation.getComments();
         if (comments == null) {
             comments = new ArrayList<Comment>();
@@ -53,7 +59,7 @@ public class AnnotationFactory {
         else {
             comments.add(comment);
         }
-        //update the citation with the RP line from this comment
+        //finally, update the citation with the RP line from this comment
         updateCitationSummary(annotatedCitation);
     }
     
@@ -70,6 +76,10 @@ public class AnnotationFactory {
     }
 
     public static void addFeature(AnnotatedCitation annotatedCitation, Feature feature) {
+        //remember to add the curator tag for this item to link it to the 
+        //curator and the relevant citation
+        feature.getEvidenceTags().add(annotatedCitation.getCuratorEvidence());
+        //now add the feature to the citation
         List<Feature> features = annotatedCitation.getFeatures();
         if (features == null) {
             features = new ArrayList<Feature>();

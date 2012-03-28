@@ -71,7 +71,8 @@ public class EvidenceTag {
     }
     
     public String getTag() {
-        return String.format("{EC%s}", number);
+        //this could actually be EP, EI, EA, EC
+        return String.format("EC%d", number);
     }
     
     @Override

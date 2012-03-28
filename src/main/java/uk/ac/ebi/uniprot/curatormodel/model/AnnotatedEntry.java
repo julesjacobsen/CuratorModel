@@ -177,7 +177,7 @@ public class AnnotatedEntry implements Annotatable {
             refBuilder.append(annotatedCitation.getCitation()).append(EOL);
             if (annotatedCitation.getComments() != null) {
                 for (Comment comment : annotatedCitation.getComments()) {
-                    commentBuilder.append(comment).append(curatorTag.getTag()).append(EOL);
+                    commentBuilder.append(comment).append(EOL);
                 }
             }
             if (annotatedCitation.getXrefs() != null) {
@@ -187,7 +187,7 @@ public class AnnotatedEntry implements Annotatable {
             }
             if (annotatedCitation.getFeatures() != null) {
                for (Feature feature : annotatedCitation.getFeatures()) {
-                    featureBuilder.append(feature).append(curatorTag.getTag()).append(EOL);
+                    featureBuilder.append(feature).append(EOL);
                 } 
             }     
         }

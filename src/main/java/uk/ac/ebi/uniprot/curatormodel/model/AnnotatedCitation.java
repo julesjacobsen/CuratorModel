@@ -149,6 +149,11 @@ public class AnnotatedCitation implements Annotatable {
                 stringBuilder.append(xref).append(EOL);
             }
         }
+        if (features != null ) {
+            for (Feature feature : features) {
+                stringBuilder.append(feature).append(EOL);
+            }
+        }
         if (sequence != null) {
             stringBuilder.append(sequence).append(EOL);
         }
