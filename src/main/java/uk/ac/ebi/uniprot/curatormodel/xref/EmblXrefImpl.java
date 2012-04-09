@@ -20,6 +20,7 @@ public class EmblXrefImpl extends XrefImpl implements EmblXref {
 
     EmblXrefImpl(Database database, String id, String description) {
         super(database, id, description);
+        setDescription(description);
     }
 
     @Override

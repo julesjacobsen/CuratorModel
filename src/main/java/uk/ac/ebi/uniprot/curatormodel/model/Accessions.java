@@ -48,7 +48,15 @@ public class Accessions {
 
     @Override
     public String toString() {
-        return "Accessions{" + "primaryAccession=" + primaryAccession + ", secondaryAccessions=" + secondaryAccessions + '}';
+        if (secondaryAccessions == null || secondaryAccessions.isEmpty()) {
+            return String.format("AC   %s;", primaryAccession);
+        }
+        
+        StringBuilder secondaryAcBuilder = new StringBuilder();
+        for (String accession : secondaryAccessions) {
+            secondaryAcBuilder.append(accession).append(";");
+        }
+        return String.format("AC   %s;%s", primaryAccession, secondaryAcBuilder.toString());
     }
  
     

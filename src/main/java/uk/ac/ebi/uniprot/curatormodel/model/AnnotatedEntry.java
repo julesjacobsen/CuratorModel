@@ -12,31 +12,30 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
  *
  * @author Jules Jacobsen <jacobsen@ebi.ac.uk>
  */
-public class FullEntry implements Entry {
+public class AnnotatedEntry implements Annotatable {
     
     Identifier id;
     Accessions accessions;
     Taxonomy tax;
-    List<CuratedCitation> citationEntries;
+    List<AnnotatedCitation> annotatedCitations;
     List<Citation> citations;
-    
+
     //interface variables - these are also generated from the citations in the
-    //citation list as some annotations may not be derived from a citation, hence the Entry nterface
-    List<Comment> comments;
-    List<Feature> features;
-    GeneNames geneNames;
-    InternalSection internalSection;
-    List<KeyWord> keywords;
-    ProteinNames proteinNames;
-    Sequence sequence;
-    List<Xref> xrefs;
+    //citation list as some annotations may not be derived from a citation, hence the Annotatable nterface
+    private List<Comment> comments;
+    private List<Feature> features;
+    private GeneNames geneNames;
+    private InternalSection internalSection;
+    private List<KeyWord> keywords;
+    private ProteinNames proteinNames;
+    private Sequence sequence;
+    private List<Xref> xrefs;
     
-    public FullEntry() {
-        super();
+    public AnnotatedEntry() {
         id = new Identifier();
         accessions = new Accessions();
         tax = new Taxonomy();
-        citationEntries = new ArrayList<CuratedCitation>();
+        annotatedCitations = new ArrayList<AnnotatedCitation>();
         citations = new ArrayList<Citation>();
         
     }
@@ -52,8 +51,8 @@ public class FullEntry implements Entry {
     }
 
     public List<Citation> getCitations() {
-        for (CuratedCitation citationEntry : citationEntries) {
-            citations.addAll(citationEntry.getCitations());
+        for (AnnotatedCitation annotatedCitation : annotatedCitations) {
+            citations.add(annotatedCitation.getCitation());
         }
         return citations;
     }
@@ -76,6 +75,10 @@ public class FullEntry implements Entry {
 
     public void setTax(Taxonomy tax) {
         this.tax = tax;
+    }
+    
+    public List<AnnotatedCitation> getAnnotatedCitations() {
+        return annotatedCitations;
     }
     
     //interface implementations
@@ -159,6 +162,37 @@ public class FullEntry implements Entry {
         this.xrefs = xrefs;
     }
     
+    public static final String EOL = System.getProperty("line.separator");
     
-    
+    public String toString() {
+        StringBuilder refBuilder = new StringBuilder();
+        StringBuilder commentBuilder = new StringBuilder();
+        StringBuilder xrefBuilder = new StringBuilder();
+        StringBuilder featureBuilder = new StringBuilder();
+        StringBuilder evidenceBuilder = new StringBuilder();
+
+        for (AnnotatedCitation annotatedCitation : annotatedCitations) {
+            EvidenceTag curatorTag = annotatedCitation.getCuratorEvidence();
+            evidenceBuilder.append(curatorTag).append(EOL);
+            refBuilder.append(annotatedCitation.getCitation()).append(EOL);
+            if (annotatedCitation.getComments() != null) {
+                for (Comment comment : annotatedCitation.getComments()) {
+                    commentBuilder.append(comment).append(EOL);
+                }
+            }
+            if (annotatedCitation.getXrefs() != null) {
+                for (Xref xref : annotatedCitation.getXrefs()) {
+                    xrefBuilder.append(xref).append(EOL);
+                }
+            }
+            if (annotatedCitation.getFeatures() != null) {
+               for (Feature feature : annotatedCitation.getFeatures()) {
+                    featureBuilder.append(feature).append(EOL);
+                } 
+            }     
+        }
+        
+        return String.format("%s%n%s%n%s%s%s%s%s", id, accessions, refBuilder, commentBuilder, xrefBuilder, featureBuilder, evidenceBuilder);
+    }
+
 }

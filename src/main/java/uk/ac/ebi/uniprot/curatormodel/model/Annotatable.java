@@ -11,12 +11,8 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
  *
  * @author Jules Jacobsen <jacobsen@ebi.ac.uk>
  */
-public interface Entry {
+public interface Annotatable {
 
-    public List<Citation> getCitations();
-    
-    public void setCitations(List<Citation> citations);
-    
     public List<Comment> getComments();
 
     public List<Feature> getFeatures();
