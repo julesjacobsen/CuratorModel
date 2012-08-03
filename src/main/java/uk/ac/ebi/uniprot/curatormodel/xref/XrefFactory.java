@@ -14,7 +14,7 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
  */
 public class XrefFactory {
     
-    private static XrefFactory instance;
+    private static volatile XrefFactory instance;
     private EnumSet ensembleXrefs;
     private EnumSet interproFamilyXrefs;
     
@@ -47,13 +47,27 @@ public class XrefFactory {
 
     public Xref buildXref(Database database, String id, String description) {
                
-        if (database == Database.EMBL) return new EmblXrefImpl(database, id, description);
-        else if (database == Database.PDB) return new PdbXrefImpl(database, id, description);        
-        else if (database == Database.GO) return new GoXrefImpl(database, id, description);
-        else if (database == Database.HAMAP) return new HamapXrefImpl(database, id, description);
-        else if (ensembleXrefs.contains(database)) return new EnsemblXrefImpl(database, id, description);
-        else if (interproFamilyXrefs.contains(database)) return new DomainXrefImpl(database, id, description);
-        else return new XrefImpl(database, id, description);
+        if (database == Database.EMBL) {
+            return new EmblXrefImpl(database, id, description);
+        }
+        else if (database == Database.PDB) {        
+            return new PdbXrefImpl(database, id, description);
+        }        
+        else if (database == Database.GO) {
+            return new GoXrefImpl(database, id, description);
+        }
+        else if (database == Database.HAMAP) {
+            return new HamapXrefImpl(database, id, description);
+        }
+        else if (ensembleXrefs.contains(database)) {
+            return new EnsemblXrefImpl(database, id, description);
+        }
+        else if (interproFamilyXrefs.contains(database)) {
+            return new DomainXrefImpl(database, id, description);
+        }
+        else {
+            return new XrefImpl(database, id, description);
+        }
     }
     
 

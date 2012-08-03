@@ -19,7 +19,7 @@ import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
  * @author Jules Jacobsen <jacobsen@ebi.ac.uk>
  */
 public class AnnotationFactory {
-    private static Logger logger = Logger.getLogger(AnnotationFactory.class.getName());
+    private static final Logger logger = Logger.getLogger(AnnotationFactory.class.getName());
     
     public static AnnotatedEntry getEntry(Accessions accessions) {
         logger.info(String.format("retrieving UniProt entry for: %s", accessions.getPrimaryAccession()));
@@ -28,7 +28,7 @@ public class AnnotationFactory {
     }
 
     public static AnnotatedCitation buildAnnotatedCitation(Citation citation, EvidenceTag evTag) {
-        List<EvidenceTag> evTags = new ArrayList<EvidenceTag>();
+//        List<EvidenceTag> evTags = new ArrayList<EvidenceTag>();
         evTag.setPrefix("EC");
         evTag.setType("Experimental");
         evTag.setId("PubMed=" + citation.getPmid());

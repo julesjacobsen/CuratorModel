@@ -47,6 +47,7 @@ public class Comment implements EvidenceTagged {
         evTags = evidenceTags;
     }
 
+    @Override
     public String toString() {
         if (!evTags.isEmpty()) {
             //want to get {EC1,EC2,EI4}

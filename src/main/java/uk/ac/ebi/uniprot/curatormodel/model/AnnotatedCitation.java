@@ -4,7 +4,6 @@
  */
 package uk.ac.ebi.uniprot.curatormodel.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
 
@@ -112,7 +111,7 @@ public class AnnotatedCitation implements Annotatable {
     }
 
     public void setGeneNames(GeneNames gn) {
-        this.geneNames = geneNames;
+        this.geneNames = gn;
     }
 
     public void setInternalSection(InternalSection internalSection) {

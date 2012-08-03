@@ -1,12 +1,10 @@
 package uk.ac.ebi.curatormodel;
 
 import uk.ac.ebi.uniprot.curatormodel.model.*;
-import uk.ac.ebi.uniprot.curatormodel.util.CitationFactory;
 import uk.ac.ebi.uniprot.curatormodel.util.AnnotationFactory;
+import uk.ac.ebi.uniprot.curatormodel.util.CitationFactory;
 import uk.ac.ebi.uniprot.curatormodel.xref.Database;
-import uk.ac.ebi.uniprot.curatormodel.xref.EmblXrefImpl;
 import uk.ac.ebi.uniprot.curatormodel.xref.XrefFactory;
-import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.EmblXref;
 import uk.ac.ebi.uniprot.curatormodel.xref.interfaces.Xref;
 
 /**

@@ -164,6 +164,7 @@ public class AnnotatedEntry implements Annotatable {
     
     public static final String EOL = System.getProperty("line.separator");
     
+    @Override
     public String toString() {
         StringBuilder refBuilder = new StringBuilder();
         StringBuilder commentBuilder = new StringBuilder();

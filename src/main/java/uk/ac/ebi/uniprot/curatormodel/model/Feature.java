@@ -67,6 +67,7 @@ public class Feature implements EvidenceTagged {
         this.evidenceTags = evidenceTags;
     }
       
+    @Override
     public String toString(){
         if (!evidenceTags.isEmpty()) {
             //want to get {EC1,EC2,EI4}
