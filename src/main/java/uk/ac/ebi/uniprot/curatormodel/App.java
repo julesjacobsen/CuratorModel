@@ -1,4 +1,4 @@
-package uk.ac.ebi.curatormodel;
+package uk.ac.ebi.uniprot.curatormodel;
 
 import uk.ac.ebi.uniprot.curatormodel.model.*;
 import uk.ac.ebi.uniprot.curatormodel.util.AnnotationFactory;
